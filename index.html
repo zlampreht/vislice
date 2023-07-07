@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vislice</title>
+  <link rel="stylesheet" href="./fireworks.css">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap");
+
+    * {
+      font-family: "Roboto", sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .full {
+      width: 100vw;
+      height: 100vh;
+
+    }
+
+    .container {
+      height: 80%;
+      aspect-ratio: 2;
+      max-height: calc(100% - 20px);
+
+
+    }
+
+    .drawer {
+      height: 100%;
+      width: 100%;
+      flex: 1;
+    }
+
+    .drawer img {
+      width: 50%;
+      height: 100%;
+      object-fit: contain;
+      max-height: 400px;
+      min-height: 200px;
+      min-width: 200px;
+      object-fit: contain;
+    }
+
+
+    .guessing {
+      display: flex;
+      flex: 1;
+      height: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      border-radius: 25px;
+      background-color: rgb(240, 240, 240);
+      width: 100%;
+    }
+
+    div.modal-content {
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(50, 50, 50, 0.5);
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    div.modal {
+      padding: 10px;
+      background-color: white;
+      border-radius: 25px;
+      width: 480px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+
+    div.modal-vsebina {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+    }
+
+
+
+
+
+    input {
+      padding: 7px;
+      border-radius: 25px;
+      border: 1px solid rgb(170, 170, 170);
+      font-size: 20px;
+      height: 40px;
+
+    }
+
+    #word {
+      font-size: 20px;
+      letter-spacing: 5px;
+
+
+    }
+
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 5px
+    }
+
+
+    button.submit {
+      background-color: rgb(46, 151, 197);
+      color: white;
+      padding: 10px;
+      border-radius: 25px;
+      border: 0;
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      height: 40px;
+      font-size: 18px;
+      margin-bottom: 15px;
+
+    }
+
+
+    #grid button {
+      height: 40px;
+      aspect-ratio: 1;
+      border-radius: 5px;
+      border: 0;
+      font-size: 16px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: rgb(159, 0, 252)
+    }
+
+    #grid button:disabled {
+      background-color: transparent;
+      color: rgb (50, 50, 50);
+
+    }
+
+    #grid button:hover:not([disabled]) {
+      cursor: pointer;
+      background-color: rgb(46, 151, 197);
+    }
+
+    .fireworks-container {
+      background-color: rgba(38, 38, 57 0.825) !important;
+    }
+   .swal2-modal{
+
+    border-radius: 25px !important;
+}
+    @media only screen and (max-width: 850px) {
+
+      .container {
+        background-color: white;
+        flex-direction: column;
+        height: 90%;
+        width: calc(100% - 20px);
+      }
+
+      .modal {
+        width: calc(100% - 20px);
+        
+
+      }
+      .swal2-modal{
+        width: calc(100% - 20px);
+      }
+      .swal2-confirm {
+        background-color: rgb (50, 50, 50) !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="modal-content fireworks-container" id="fireworks">
+    <div class="firework"></div>
+    <div class="firework"></div>
+    <div class="firework"></div>
+  </div>
+
+  <div class="modal-content " id="modal">
+    <div class="modal">
+      <div class="flex-center">
+        <h2>Izberi besedo</h2>
+      </div>
+      <form id="insert-word">
+        <div class="modal-vsebina">
+          <input type="password" name="beseda" oninput="validateInput(this)" minlength="3" maxlength="10"
+            placeholder=" vnesi  besedo" />
+        </div>
+        <button class="submit">potrdi</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="flex-center full">
+    <div class="container flex-center">
+      <div id="drawer" class="drawer flex-center"></div>
+      <div class="guessing">
+        <p id="word"></p>
+        <div id="grid"></div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script
+
+</html>
